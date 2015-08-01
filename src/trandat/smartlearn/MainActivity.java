@@ -1,6 +1,8 @@
 package trandat.smartlearn;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
@@ -8,6 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 /**
  * 
@@ -16,6 +21,8 @@ import android.widget.Button;
  */
 public class MainActivity extends Activity {
 
+	static private String PassWord = "admin";
+	String temp_pass = "";
 	Button btn_class1,btn_class2,btn_class3,btn_close,btn_add,btn_setting; //Button in this activity
 	
 	@Override
@@ -77,6 +84,60 @@ public class MainActivity extends Activity {
 				CallFormAnswer();
 			}
 		});
+        
+        //set onclick event for button close, button setting, button add
+        //button close: user must input correct password to terminate app
+        btn_close.setOnClickListener(new OnClickListener() 
+        {			
+			@Override
+			public void onClick(View v) 
+			{
+				// TODO Auto-generated method stub
+				AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+				alertDialog.setTitle("Nhập mật khẩu");
+				alertDialog.setMessage("Nhập mật khẩu");
+	
+				final EditText input = new EditText(MainActivity.this);
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+				     LinearLayout.LayoutParams.MATCH_PARENT,
+				     LinearLayout.LayoutParams.MATCH_PARENT);
+				input.setLayoutParams(lp);
+				 alertDialog.setView(input);
+				 //alertDialog.setIcon(R.drawable.key);
+				
+				 alertDialog.setPositiveButton("Xong",
+				     new DialogInterface.OnClickListener() 
+				 {
+				         public void onClick(DialogInterface dialog, int which) 
+				         {
+				             temp_pass = input.getText().toString();
+				             if (temp_pass != null) 
+					         {
+					             if (temp_pass.equals(PassWord)) 
+					             {
+					                 MainActivity.super.onBackPressed();
+					             } 
+					             else 
+					             {
+					                 Toast.makeText(getApplicationContext(),
+					                     "Sai mật khẩu!", Toast.LENGTH_SHORT).show();
+					                 }
+					             }
+				         	}
+				 });
+				
+				 alertDialog.setNegativeButton("Hủy",
+				     new DialogInterface.OnClickListener() 
+				 {
+				         public void onClick(DialogInterface dialog, int which) 
+				         {
+				             dialog.cancel();
+				         }
+				 });
+				
+				 alertDialog.show();
+			}
+        });
     }
 	
 	@Override

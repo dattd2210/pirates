@@ -28,6 +28,11 @@
             android:theme="@android:style/Theme.Holo.Wallpaper.NoTitleBar">
             
         </activity>
+        <activity 
+            android:name="trandat.smartlearn.AddQuestionActivity"
+            android:theme="@android:style/Theme.Holo.Wallpaper.NoTitleBar">
+            
+        </activity>
     </application>
 
 </manifest>
