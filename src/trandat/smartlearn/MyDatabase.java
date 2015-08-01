@@ -210,9 +210,7 @@ public class MyDatabase {
 	public void updatePriority(int ID, int newPriority)
 	{
 		 ContentValues data = new ContentValues();
-		 data.put("Field1","bob");
-		 data.put("Field2",19);
-		 data.put("Field3","male");
+		 data.put(Priority,newPriority);
 		 database.update(TABLE_NAME, data, QuestionID +" = " + ID, null);
 	}
 	
