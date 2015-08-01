@@ -214,6 +214,35 @@ public class MyDatabase {
 		 database.update(TABLE_NAME, data, QuestionID +" = " + ID, null);
 	}
 	
+	/**
+	 * Purpose: add new question into database
+	 * @param Content: content of question
+	 * @param Answer1: correct answer
+	 * @param Answer2
+	 * @param Answer3
+	 * @param Answer4
+	 */
+	public void insert(String content,String answer1,String answer2,String answer3,String answer4)
+	{
+		ContentValues data = new ContentValues();
+		data.put(QuestionID, getNumberOfRecordInDB() + 1);
+		data.put(Content, content);
+		data.put(Answer1, answer1);
+		data.put(Answer2, answer2);
+		data.put(Answer3, answer3);
+		data.put(Answer4, answer4);
+		data.put(Priority,0);
+		database.insert(TABLE_NAME, null, data);
+	}
+	
+	/**
+	 * Purpose: get number of record in database
+	 * @return
+	 */
+	public int getNumberOfRecordInDB()
+	{
+		return database.rawQuery("Select * from "+TABLE_NAME, null).getCount();
+	}
 	
 	
 

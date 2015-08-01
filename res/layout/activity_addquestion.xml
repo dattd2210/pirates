@@ -1,7 +1,123 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Câu hỏi:" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edtxt_content"
+        android:text="Câu trả lời đúng:" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edtxt_correctAnswer"
+        android:text="Câu trả lời thêm 1: " />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edtxt_Answer1"
+        android:text="Câu trả lời thêm 2: " />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edtxt_Answer2"
+        android:text="Câu trả lời thêm 3: " />
+
+    <EditText
+        android:id="@+id/edtxt_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
     
+    <EditText
+        android:id="@+id/edtxt_correctAnswer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:maxLength="35"
+        android:layout_below="@+id/textView2"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+    
+    <EditText
+        android:id="@+id/edtxt_Answer1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:maxLength="35"
+        android:layout_below="@+id/textView3"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+    
+    <EditText
+        android:id="@+id/edtxt_Answer2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:maxLength="35"
+        android:layout_below="@+id/textView4"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+    
+    <EditText
+        android:id="@+id/edtxt_Answer3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:maxLength="35"
+        android:layout_below="@+id/textView5"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+    
+    <Button
+        android:id="@+id/btn_OK"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="50dp"
+        android:text="OK" />
+    
+    <Button
+        android:id="@+id/btn_Exit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
+        android:text="Thoát" />
 
 </RelativeLayout>

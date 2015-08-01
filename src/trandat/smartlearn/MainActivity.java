@@ -138,6 +138,74 @@ public class MainActivity extends Activity {
 				 alertDialog.show();
 			}
         });
+        
+        
+        //button setting: change password, given number of correct answer to terminate app and 
+        //set how many time for service call the application when user don't answer question yet but pressed 
+        //home button
+        btn_setting.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+        
+        
+        //button add: allow to user add new question for that app
+        btn_add.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+				alertDialog.setTitle("Nhập mật khẩu");
+				alertDialog.setMessage("Nhập mật khẩu");
+	
+				final EditText input = new EditText(MainActivity.this);
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+				     LinearLayout.LayoutParams.MATCH_PARENT,
+				     LinearLayout.LayoutParams.MATCH_PARENT);
+				input.setLayoutParams(lp);
+				 alertDialog.setView(input);
+				 //alertDialog.setIcon(R.drawable.key);
+				
+				 alertDialog.setPositiveButton("Xong",
+				     new DialogInterface.OnClickListener() 
+				 {
+				         public void onClick(DialogInterface dialog, int which) 
+				         {
+				             temp_pass = input.getText().toString();
+				             if (temp_pass != null) 
+					         {
+					             if (temp_pass.equals(PassWord)) 
+					             {
+					                 CallFormAddQuestion();
+					             } 
+					             else 
+					             {
+					                 Toast.makeText(getApplicationContext(),
+					                     "Sai mật khẩu!", Toast.LENGTH_SHORT).show();
+					                 }
+					             }
+				         	}
+				 });
+				
+				 alertDialog.setNegativeButton("Hủy",
+				     new DialogInterface.OnClickListener() 
+				 {
+				         public void onClick(DialogInterface dialog, int which) 
+				         {
+				             dialog.cancel();
+				         }
+				 });
+				
+				 alertDialog.show();
+			}
+		});
+        
+        
     }
 	
 	@Override
@@ -161,4 +229,15 @@ public class MainActivity extends Activity {
 		startActivity(answer_activity);
 		super.onBackPressed();
     }
+	
+	/**
+	 * call answer activity
+	 */
+	public void CallFormAddQuestion()
+    {
+    	Intent addQuestion_activity = new Intent(this,AddQuestionActivity.class);
+		startActivity(addQuestion_activity);
+    }
+	
+	
 }
