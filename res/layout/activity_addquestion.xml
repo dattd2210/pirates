@@ -3,46 +3,34 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:text="Khối lớp:" />
+    
+    <EditText
+        android:id="@+id/edtxt_Grade"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:maxLength="35"
+        android:layout_below="@+id/textView6"
+        android:ems="10" 
+        android:inputType="number">
+
+        <requestFocus />
+    </EditText>
+    
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edtxt_Grade"
         android:text="Câu hỏi:" />
-
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/edtxt_content"
-        android:text="Câu trả lời đúng:" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/edtxt_correctAnswer"
-        android:text="Câu trả lời thêm 1: " />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/edtxt_Answer1"
-        android:text="Câu trả lời thêm 2: " />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/edtxt_Answer2"
-        android:text="Câu trả lời thêm 3: " />
-
+    
     <EditText
         android:id="@+id/edtxt_content"
         android:layout_width="fill_parent"
@@ -54,6 +42,15 @@
 
         <requestFocus />
     </EditText>
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edtxt_content"
+        android:text="Câu trả lời đúng:" />
     
     <EditText
         android:id="@+id/edtxt_correctAnswer"
@@ -66,6 +63,14 @@
 
         <requestFocus />
     </EditText>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edtxt_correctAnswer"
+        android:text="Câu trả lời thêm 1: " />
     
     <EditText
         android:id="@+id/edtxt_Answer1"
@@ -78,6 +83,14 @@
 
         <requestFocus />
     </EditText>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edtxt_Answer1"
+        android:text="Câu trả lời thêm 2: " />
     
     <EditText
         android:id="@+id/edtxt_Answer2"
@@ -90,6 +103,15 @@
 
         <requestFocus />
     </EditText>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edtxt_Answer2"
+        android:text="Câu trả lời thêm 3: " />
+
     
     <EditText
         android:id="@+id/edtxt_Answer3"

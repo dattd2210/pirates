@@ -222,10 +222,12 @@ public class MyDatabase {
 	 * @param Answer3
 	 * @param Answer4
 	 */
-	public void insert(String content,String answer1,String answer2,String answer3,String answer4)
+	public void insert(int grade, String content,String answer1,String answer2,String answer3,String answer4)
 	{
+		int questionID = getNumberOfRecordInDB() + 2;
 		ContentValues data = new ContentValues();
-		data.put(QuestionID, getNumberOfRecordInDB() + 1);
+		data.put(Grade, grade);
+		data.put(QuestionID, questionID);
 		data.put(Content, content);
 		data.put(Answer1, answer1);
 		data.put(Answer2, answer2);

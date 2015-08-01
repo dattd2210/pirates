@@ -10,6 +10,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -41,6 +44,13 @@ public class AnswerActivity extends Activity {
         
         setContentView(R.layout.activity_answer);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); //set screen orientation on landscape
+        
+        //initialize animation for correct answer when user pressed check button
+        final Animation animation = new AlphaAnimation(1, (float)0.3); // Change alpha from fully visible to invisible
+        animation.setDuration(500); // duration - half a second
+        animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation.setRepeatCount(6); // Repeat animation infinitely
+        animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
         
         //initialize for button check and button next
         Resources resources = getResources();
@@ -173,6 +183,15 @@ public class AnswerActivity extends Activity {
 				btn_check.setVisibility(View.INVISIBLE);
 				btn_next.setActivated(true);
 				btn_next.setVisibility(View.VISIBLE);
+				
+				if(btn_answer1.getText().toString().equals(result.firstElement().elementAt(1)))
+					btn_answer1.setAnimation(animation);
+				if(btn_answer2.getText().toString().equals(result.firstElement().elementAt(1)))
+					btn_answer2.setAnimation(animation);
+				if(btn_answer3.getText().toString().equals(result.firstElement().elementAt(1)))
+					btn_answer3.setAnimation(animation);
+				if(btn_answer4.getText().toString().equals(result.firstElement().elementAt(1)))
+					btn_answer4.setAnimation(animation);
 				
 				if(UserAnswer.equals(result.firstElement().elementAt(1)))
 				{
