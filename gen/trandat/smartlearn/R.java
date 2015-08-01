@@ -1105,9 +1105,9 @@ containing a value of this type.
         public static final int btn_answer3=0x7f090043;
         public static final int btn_answer4=0x7f090044;
         public static final int btn_check=0x7f09003e;
-        public static final int btn_class1=0x7f090047;
-        public static final int btn_class2=0x7f090045;
-        public static final int btn_class3=0x7f090046;
+        public static final int btn_class1=0x7f090048;
+        public static final int btn_class2=0x7f090046;
+        public static final int btn_class3=0x7f090047;
         public static final int btn_next=0x7f09003f;
         public static final int checkbox=0x7f09002d;
         public static final int collapseActionView=0x7f090010;
@@ -1153,6 +1153,7 @@ containing a value of this type.
         public static final int tabMode=0x7f090008;
         public static final int title=0x7f09002b;
         public static final int top_action_bar=0x7f090020;
+        public static final int txt_NumOfRemainQuestion=0x7f090045;
         public static final int txt_content=0x7f090040;
         public static final int up=0x7f090021;
         public static final int useLogo=0x7f09000e;

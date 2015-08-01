@@ -33,7 +33,7 @@ public class AnswerActivity extends Activity {
 	int NumberOfCorrectAnswer = 0;
 	
 	Button btn_next,btn_check,btn_answer1,btn_answer2,btn_answer3,btn_answer4;
-	TextView txt_content;
+	TextView txt_content,txt_numOfCRemainQuestion;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,17 +82,15 @@ public class AnswerActivity extends Activity {
     			SetOfQuestions.add(element);
         } */
         
-        //handle database
-        database = new MyDatabase(this);
-        database.OpenConnecttion();
-        //database.LoadDataFromFile();
-        result = database.GetDataBaseOnGradeAndID(UserChoice);        
-        database.close();
-        
         //initialize for text view content
         txt_content = (TextView)findViewById(R.id.txt_content);
+        txt_numOfCRemainQuestion = (TextView)findViewById(R.id.txt_NumOfRemainQuestion);
         
+        
+        HandleDatabase();
         Display();
+        
+        txt_numOfCRemainQuestion.setText(30-result.size() + 1 +"/30");
         
         /*txt_content.setText(result.firstElement().firstElement());
         btn_answer1.setText(result.firstElement().elementAt(1));
@@ -176,20 +174,18 @@ public class AnswerActivity extends Activity {
 				btn_next.setActivated(true);
 				btn_next.setVisibility(View.VISIBLE);
 				
-				//make all button back to the original color
-				btn_answer1.setBackgroundColor(Color.rgb(248, 161, 48));
-		        btn_answer2.setBackgroundColor(Color.rgb(248, 161, 48));
-		        btn_answer3.setBackgroundColor(Color.rgb(248, 161, 48));
-		        btn_answer4.setBackgroundColor(Color.rgb(248, 161, 48));
-				
 				if(UserAnswer.equals(result.firstElement().elementAt(1)))
 				{
 					NumberOfCorrectAnswer ++;
 				}
 				
 				//terminate this app when user answer correct number question equal with the given number
-				if(NumberOfCorrectAnswer >= 5)
-					onStop();
+				if(NumberOfCorrectAnswer >= 30)
+				{
+					android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(1);
+                    MainActivity.Exit();
+				}
 			}
 		});
 		
@@ -198,15 +194,31 @@ public class AnswerActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				//SetOfQuestions.remove(0);
 				
+				//make all button back to the original color
+				btn_answer1.setBackgroundColor(Color.rgb(248, 161, 48));
+		        btn_answer2.setBackgroundColor(Color.rgb(248, 161, 48));
+		        btn_answer3.setBackgroundColor(Color.rgb(248, 161, 48));
+		        btn_answer4.setBackgroundColor(Color.rgb(248, 161, 48));
+				
+		        //hide next button and show check button
 				btn_check.setActivated(true);
 				btn_check.setVisibility(View.VISIBLE);
 				btn_next.setActivated(false);
 				btn_next.setVisibility(View.INVISIBLE);
 				
-				result.remove(0);
-				Display();
+				if(result.isEmpty())
+				{
+					HandleDatabase();
+					NumberOfCorrectAnswer = 0;
+				}
+				else
+					result.remove(0);
+				//update number of remain question
+				txt_numOfCRemainQuestion.setText(30-result.size() + 1 +"/30");
+				
+				if(!result.isEmpty())
+					Display();
 			}
 		});
 		
@@ -233,12 +245,9 @@ public class AnswerActivity extends Activity {
         }*/ 
 		
 		int[] randomAnswerDisplay = new int[4];
-		randomAnswerDisplay[0] = random.nextInt(4);
+		randomAnswerDisplay[0] = random.nextInt(3)+1;
 		switch(randomAnswerDisplay[0])
 		{
-		case 0:
-			Display();
-			break;
 		case 1:
 			randomAnswerDisplay[1] = 2;
 			randomAnswerDisplay[2] = 3;
@@ -276,6 +285,18 @@ public class AnswerActivity extends Activity {
             btn_answer3.setText(result.firstElement().elementAt(randomAnswerDisplay[2]));
             btn_answer4.setText(result.firstElement().elementAt(randomAnswerDisplay[3]));
         }
+	}
+	
+	/**
+	 * Handle database
+	 */
+	public void HandleDatabase()
+	{
+        database = new MyDatabase(this);
+        database.OpenConnecttion();
+        //database.LoadDataFromFile();
+        result = database.GetDataBaseOnGradeAndID(UserChoice);        
+        database.close();
 	}
 	
 	@Override

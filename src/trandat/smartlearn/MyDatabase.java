@@ -170,7 +170,7 @@ public class MyDatabase {
 		//Cursor cursor = database.query(TABLE_NAME, columns, null, null, null, null, null);
 		
 		int count = 0;
-		String SelectQuery;
+		//String SelectQuery;
 		
 		//String[] columns = new String[] {Content,Answer1,Answer2,Answer3,Answer4};
 		Cursor cursor ;//= database.query(TABLE_NAME, columns, null, null, null, null, null);

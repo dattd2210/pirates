@@ -78,6 +78,11 @@ public class MainActivity extends Activity {
 		
 	}
 	
+	public static void Exit()
+	{
+		
+	}
+	
 	
 	/**
 	 * call answer activity
@@ -86,5 +91,6 @@ public class MainActivity extends Activity {
     {
     	Intent answer_activity = new Intent(this,AnswerActivity.class);
 		startActivity(answer_activity);
+		super.onBackPressed();
     }
 }
