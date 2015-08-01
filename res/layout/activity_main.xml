@@ -8,16 +8,50 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:scaleType="fitXY"
-        android:src="@drawable/images_background" />
+        android:src="@drawable/background4" />
+
+    <Button
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:id="@+id/btn_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btn_close" />
+
+    <Button
+        android:id="@+id/btn_addQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btn_setting" />
+
+    <Button
+        android:id="@+id/btn_class1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_setting"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp" />
 
     <Button
         android:id="@+id/btn_class2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-
+        android:layout_below="@+id/btn_class1"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"/>
+    
     <Button
         android:id="@+id/btn_class3"
         android:layout_width="wrap_content"
@@ -25,13 +59,5 @@
         android:layout_below="@+id/btn_class2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp" />
-
-    <Button
-        android:id="@+id/btn_class1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/btn_class2"
-        android:layout_marginBottom="50dp" />
 
 </RelativeLayout>

@@ -16,7 +16,7 @@ import android.widget.Button;
  */
 public class MainActivity extends Activity {
 
-	Button btn_class1,btn_class2,btn_class3; //Button in this activity
+	Button btn_class1,btn_class2,btn_class3,btn_close,btn_add,btn_setting; //Button in this activity
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,13 @@ public class MainActivity extends Activity {
         
         btn_class3 = (Button)findViewById(R.id.btn_class3);
         btn_class3.setBackground(resources.getDrawable(R.drawable.icon_btn_class3_config));
+        
+        btn_close = (Button)findViewById(R.id.btn_close);
+        btn_close.setBackground(resources.getDrawable(R.drawable.btn_close));
+        btn_add = (Button)findViewById(R.id.btn_addQuestion);
+        btn_add.setBackground(resources.getDrawable(R.drawable.btn_add));
+        btn_setting = (Button)findViewById(R.id.btn_setting);
+        btn_setting.setBackground(resources.getDrawable(R.drawable.btn_setting));
         
         //Set event click on button: when any button is clicked, system will call the answer activity 
         //and set UserChoice to decide which grade questions will be loaded
