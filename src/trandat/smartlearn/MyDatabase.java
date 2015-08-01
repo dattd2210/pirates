@@ -78,7 +78,7 @@ public class MyDatabase {
 			AssetManager am = context.getAssets();
 			InputStream is = am.open("SQLQuery.txt"); //text file in assets folder
 			
-			br = new BufferedReader(new InputStreamReader(is,"UTF-16"));
+			br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
 			
 			String temp = "";
 			
@@ -99,6 +99,17 @@ public class MyDatabase {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
+		
+		/*database.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+		database.execSQL("CREATE TABLE " + TABLE_NAME + " ("
+				+ QuestionID + " INT PRIMARY KEY, "
+				+ Grade  + " INT, "
+				+ Content  + " TEXT, "
+				+ Answer1  + " TEXT, " 
+				+ Answer2  + " TEXT, "
+				+ Answer3  + " TEXT, "
+				+ Answer4  + " TEXT, "
+				+ Priority + " INT);");*/
 	}
 	
 	/**
@@ -163,18 +174,20 @@ public class MyDatabase {
 		
 		//String[] columns = new String[] {Content,Answer1,Answer2,Answer3,Answer4};
 		Cursor cursor ;//= database.query(TABLE_NAME, columns, null, null, null, null, null);
-		SelectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE Grade = "+grade+" ORDER BY "+Priority+" ASC";
+		/*SelectQuery = "SELECT  * FROM " + TABLE_NAME;
 		cursor = null;			
 		
-		cursor = database.rawQuery(SelectQuery, null);
+		cursor = database.rawQuery(SelectQuery, null);*/
+		String[] columns = {Content,Answer1,Answer2,Answer3,Answer4};
+		cursor = database.query(TABLE_NAME, columns, "Grade=?", new String[]{""+grade}, null, null, Priority);
 		
 		if(cursor != null && cursor.getCount() > 0)
 		{
 			cursor.moveToFirst();
-			while(count < 30 && cursor.isLast())
+			while(count < 30 && !cursor.isLast())
 			{
 				Vector<String> element = new Vector<String>();
-				for(int i = 2; i< 7; i++)
+				for(int i = 0; i< 5; i++)
 				{
 					if(cursor.getString(i) != null)
 						element.add(cursor.getString(i));
@@ -205,6 +218,7 @@ public class MyDatabase {
 	
 		@Override
 		public void onCreate(SQLiteDatabase arg0) {
+			//arg0.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 			arg0.execSQL("CREATE TABLE " + TABLE_NAME + " ("
 					+ QuestionID + " INT PRIMARY KEY, "
 					+ Grade  + " INT, "
@@ -213,7 +227,7 @@ public class MyDatabase {
 					+ Answer2  + " TEXT, "
 					+ Answer3  + " TEXT, "
 					+ Answer4  + " TEXT, "
-					+ Priority + "INT);");
+					+ Priority + " INT);");
 		}
 	
 		@Override

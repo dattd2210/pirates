@@ -22,9 +22,9 @@ import android.widget.TextView;
 public class AnswerActivity extends Activity {
 
 	static public int UserChoice = 0;
-	Vector<Integer> SetOfQuestions = new Vector<Integer>();
-	Vector<Integer> randomAnswerDisplay = new Vector<Integer>();
-	Integer element;
+	//Vector<Integer> SetOfQuestions = new Vector<Integer>();
+	//Vector<Integer> randomAnswerDisplay = new Vector<Integer>();
+	//Integer element;
 	Random random = new Random();
 	MyDatabase database;
 	Vector<Vector<String>> result = new Vector<Vector<String>>();
@@ -68,7 +68,7 @@ public class AnswerActivity extends Activity {
         btn_answer4.setBackgroundColor(Color.rgb(248, 161, 48));
         
         //random sequence of question to display for user
-        element = 0;
+        /*element = 0;
         for(int i = 0; i< 30; i++)
         {
     		element = random.nextInt(30);
@@ -80,18 +80,19 @@ public class AnswerActivity extends Activity {
     		}
     		else
     			SetOfQuestions.add(element);
-        } 
+        } */
         
         //handle database
         database = new MyDatabase(this);
         database.OpenConnecttion();
-        database.LoadDataFromFile();
+        //database.LoadDataFromFile();
         result = database.GetDataBaseOnGradeAndID(UserChoice);        
         database.close();
         
         //initialize for text view content
         txt_content = (TextView)findViewById(R.id.txt_content);
         
+        Display();
         
         /*txt_content.setText(result.firstElement().firstElement());
         btn_answer1.setText(result.firstElement().elementAt(1));
@@ -169,15 +170,26 @@ public class AnswerActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				//visible button next
 				btn_check.setActivated(false);
 				btn_check.setVisibility(View.INVISIBLE);
 				btn_next.setActivated(true);
 				btn_next.setVisibility(View.VISIBLE);
 				
+				//make all button back to the original color
+				btn_answer1.setBackgroundColor(Color.rgb(248, 161, 48));
+		        btn_answer2.setBackgroundColor(Color.rgb(248, 161, 48));
+		        btn_answer3.setBackgroundColor(Color.rgb(248, 161, 48));
+		        btn_answer4.setBackgroundColor(Color.rgb(248, 161, 48));
+				
 				if(UserAnswer.equals(result.firstElement().elementAt(1)))
 				{
 					NumberOfCorrectAnswer ++;
 				}
+				
+				//terminate this app when user answer correct number question equal with the given number
+				if(NumberOfCorrectAnswer >= 5)
+					onStop();
 			}
 		});
 		
@@ -186,7 +198,14 @@ public class AnswerActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				SetOfQuestions.remove(0);
+				//SetOfQuestions.remove(0);
+				
+				btn_check.setActivated(true);
+				btn_check.setVisibility(View.VISIBLE);
+				btn_next.setActivated(false);
+				btn_next.setVisibility(View.INVISIBLE);
+				
+				result.remove(0);
 				Display();
 			}
 		});
@@ -199,10 +218,10 @@ public class AnswerActivity extends Activity {
 	public void Display()
 	{
 		//random sequence to display the answer in button answer
-		element = 0;
+		/*element = 0;
         for(int i = 0; i< 4; i++)
         {
-    		element = random.nextInt(30);
+    		element = random.nextInt(4);
     		if(randomAnswerDisplay.contains(element) ||
     			element == 0)
     		{
@@ -211,16 +230,57 @@ public class AnswerActivity extends Activity {
     		}
     		else
     			randomAnswerDisplay.add(element);
-        } 
+        }*/ 
+		
+		int[] randomAnswerDisplay = new int[4];
+		randomAnswerDisplay[0] = random.nextInt(4);
+		switch(randomAnswerDisplay[0])
+		{
+		case 0:
+			Display();
+			break;
+		case 1:
+			randomAnswerDisplay[1] = 2;
+			randomAnswerDisplay[2] = 3;
+			randomAnswerDisplay[3] = 4;
+			break;
+		case 2:
+			randomAnswerDisplay[1] = 1;
+			randomAnswerDisplay[2] = 3;
+			randomAnswerDisplay[3] = 4;
+			break;
+		case 3:
+			randomAnswerDisplay[1] = 1;
+			randomAnswerDisplay[2] = 2;
+			randomAnswerDisplay[3] = 4;
+			break;
+		case 4:
+			randomAnswerDisplay[1] = 1;
+			randomAnswerDisplay[2] = 2;
+			randomAnswerDisplay[3] = 3;
+			break;
+		}
         
         //display question and answer in to correspond place
-        while(!SetOfQuestions.isEmpty())
+        //while(!SetOfQuestions.isEmpty())
         {
-        	txt_content.setText(result.elementAt(SetOfQuestions.firstElement()).firstElement());
+        	/*txt_content.setText(result.elementAt(SetOfQuestions.firstElement()).firstElement());
         	btn_answer1.setText(result.elementAt(SetOfQuestions.firstElement()).elementAt(randomAnswerDisplay.elementAt(0)));
             btn_answer2.setText(result.elementAt(SetOfQuestions.firstElement()).elementAt(randomAnswerDisplay.elementAt(1)));
             btn_answer3.setText(result.elementAt(SetOfQuestions.firstElement()).elementAt(randomAnswerDisplay.elementAt(2)));
-            btn_answer4.setText(result.elementAt(SetOfQuestions.firstElement()).elementAt(randomAnswerDisplay.elementAt(3)));
+            btn_answer4.setText(result.elementAt(SetOfQuestions.firstElement()).elementAt(randomAnswerDisplay.elementAt(3)));*/
+        	
+        	txt_content.setText(result.firstElement().firstElement());
+        	btn_answer1.setText(result.firstElement().elementAt(randomAnswerDisplay[0]));
+            btn_answer2.setText(result.firstElement().elementAt(randomAnswerDisplay[1]));
+            btn_answer3.setText(result.firstElement().elementAt(randomAnswerDisplay[2]));
+            btn_answer4.setText(result.firstElement().elementAt(randomAnswerDisplay[3]));
         }
+	}
+	
+	@Override
+	public void onStop()
+	{
+		super.onStop();
 	}
 }
