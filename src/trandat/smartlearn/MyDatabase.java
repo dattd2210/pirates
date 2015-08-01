@@ -6,13 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.method.MovementMethod;
 
 /**
  * 
@@ -178,7 +178,7 @@ public class MyDatabase {
 		cursor = null;			
 		
 		cursor = database.rawQuery(SelectQuery, null);*/
-		String[] columns = {Content,Answer1,Answer2,Answer3,Answer4};
+		String[] columns = {Content,Answer1,Answer2,Answer3,Answer4,QuestionID, Priority};
 		cursor = database.query(TABLE_NAME, columns, "Grade=?", new String[]{""+grade}, null, null, Priority);
 		
 		if(cursor != null && cursor.getCount() > 0)
@@ -187,7 +187,7 @@ public class MyDatabase {
 			while(count < 30 && !cursor.isLast())
 			{
 				Vector<String> element = new Vector<String>();
-				for(int i = 0; i< 5; i++)
+				for(int i = 0; i< 7; i++)
 				{
 					if(cursor.getString(i) != null)
 						element.add(cursor.getString(i));
@@ -200,6 +200,20 @@ public class MyDatabase {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * Update Priority of a question
+	 * @param ID: ID of question want to udpate
+	 * @param newPriority
+	 */
+	public void updatePriority(int ID, int newPriority)
+	{
+		 ContentValues data = new ContentValues();
+		 data.put("Field1","bob");
+		 data.put("Field2",19);
+		 data.put("Field3","male");
+		 database.update(TABLE_NAME, data, QuestionID +" = " + ID, null);
 	}
 	
 	

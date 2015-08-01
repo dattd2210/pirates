@@ -179,13 +179,12 @@ public class AnswerActivity extends Activity {
 					NumberOfCorrectAnswer ++;
 				}
 				
-				//terminate this app when user answer correct number question equal with the given number
-				if(NumberOfCorrectAnswer >= 30)
-				{
-					android.os.Process.killProcess(android.os.Process.myPid());
-                    System.exit(1);
-                    MainActivity.Exit();
-				}
+				//update priority of this question (the question will be showed to user)
+				database.OpenConnecttion();
+	            database.updatePriority(Integer.parseInt(result.firstElement().elementAt(5)), 
+	            		Integer.parseInt(result.firstElement().elementAt(6)) + 1);
+	            database.close();
+				
 			}
 		});
 		
@@ -207,10 +206,20 @@ public class AnswerActivity extends Activity {
 				btn_next.setActivated(false);
 				btn_next.setVisibility(View.INVISIBLE);
 				
-				if(result.isEmpty())
+				if(30-result.size() + 1 == 30)
 				{
-					HandleDatabase();
-					NumberOfCorrectAnswer = 0;
+					//terminate this app when user answer correct number question equal with the given number
+					if(NumberOfCorrectAnswer >= 5)
+					{
+						android.os.Process.killProcess(android.os.Process.myPid());
+	                    System.exit(1);
+	                    MainActivity.Exit();
+					}
+					else
+					{
+						HandleDatabase();
+						NumberOfCorrectAnswer = 0;
+					}
 				}
 				else
 					result.remove(0);
@@ -284,6 +293,7 @@ public class AnswerActivity extends Activity {
             btn_answer2.setText(result.firstElement().elementAt(randomAnswerDisplay[1]));
             btn_answer3.setText(result.firstElement().elementAt(randomAnswerDisplay[2]));
             btn_answer4.setText(result.firstElement().elementAt(randomAnswerDisplay[3]));
+            
         }
 	}
 	
@@ -300,8 +310,8 @@ public class AnswerActivity extends Activity {
 	}
 	
 	@Override
-	public void onStop()
+	public void onBackPressed()
 	{
-		super.onStop();
+		
 	}
 }
