@@ -100,6 +100,10 @@ public class AnswerActivity extends Activity {
         btn_answer4.setText(result.firstElement().elementAt(4));*/
         
         
+        //set event click on answer button, check button and next button:
+        //change color when click on button answer
+        //visible next button when click on check button
+        //move to next question when click on next button
         btn_answer1.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -177,6 +181,15 @@ public class AnswerActivity extends Activity {
 			}
 		});
 		
+		btn_next.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SetOfQuestions.remove(0);
+				Display();
+			}
+		});
 		
 	}
 	
