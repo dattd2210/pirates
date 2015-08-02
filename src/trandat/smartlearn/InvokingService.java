@@ -35,13 +35,13 @@ private Handler customHandler = new Handler();
 		// TODO Auto-generated method stub
 		super.onCreate();
 		
-		Toast.makeText(this, "Service is created", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "Service is created", Toast.LENGTH_LONG).show();
 	}
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		Toast.makeText(this, "Service is started", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "Service is started", Toast.LENGTH_LONG).show();
 
 		// Start time counting
 		startTime = SystemClock.uptimeMillis();
@@ -54,7 +54,7 @@ private Handler customHandler = new Handler();
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		Toast.makeText(this, "Service is stopped " + timeInMilliseconds + " miliseconds", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "Service is stopped " + timeInMilliseconds + " miliseconds", Toast.LENGTH_LONG).show();
 	}
 	
 	private Runnable updateTimerThread = new Runnable() {

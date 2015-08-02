@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,12 +40,20 @@ public class AnswerActivity extends Activity {
 	Button btn_next,btn_check,btn_answer1,btn_answer2,btn_answer3,btn_answer4;
 	TextView txt_content,txt_numOfCRemainQuestion;
 	
+	//sounds
+	MediaPlayer correctVoice, wrongVoice;
+	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_answer);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); //set screen orientation on landscape
+        
+        //initialize sounds
+        correctVoice = MediaPlayer.create(this, R.raw.correctanswer);
+        wrongVoice = MediaPlayer.create(this, R.raw.wronganswer);
+        
         
         //initialize animation for correct answer when user pressed check button
         final Animation animation = new AlphaAnimation(1, (float)0.3); // Change alpha from fully visible to invisible
@@ -196,8 +205,11 @@ public class AnswerActivity extends Activity {
 				
 				if(UserAnswer.equals(result.firstElement().elementAt(1)))
 				{
+					correctVoice.start();
 					NumberOfCorrectAnswer ++;
 				}
+				else
+					wrongVoice.start();
 				
 				//update priority of this question (the question will be showed to user)
 				database.OpenConnecttion();
@@ -213,6 +225,9 @@ public class AnswerActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				//correctVoice.stop();
+				//wrongVoice.stop();
 				
 				//clear animation
 				btn_answer1.clearAnimation();
