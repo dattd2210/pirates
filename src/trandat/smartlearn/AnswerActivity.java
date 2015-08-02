@@ -213,6 +213,12 @@ public class AnswerActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
+				//clear animation
+				btn_answer1.clearAnimation();
+				btn_answer2.clearAnimation();
+				btn_answer3.clearAnimation();
+				btn_answer4.clearAnimation();
+				
 				//make all button back to the original color
 				btn_answer1.setBackgroundColor(Color.rgb(248, 161, 48));
 		        btn_answer2.setBackgroundColor(Color.rgb(248, 161, 48));
