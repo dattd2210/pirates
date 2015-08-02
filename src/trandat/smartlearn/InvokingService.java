@@ -74,6 +74,7 @@ private Handler customHandler = new Handler();
 				}
 				//Intent i = new Intent(getApplicationContext(),MainActivity.class);
 				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				//android.os.Process.killProcess(android.os.Process.);
 	            startActivity(i);
 	            isCallMainActivity = false;
 				

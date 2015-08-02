@@ -26,6 +26,8 @@ public class MainActivity extends Activity {
 	Button btn_class1,btn_class2,btn_class3,btn_close,btn_add,btn_setting; //Button in this activity
 	Intent i;
 	
+	boolean isClickAddButton = false;
+	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,12 +120,12 @@ public class MainActivity extends Activity {
 					         {
 					             if (temp_pass.equals(PassWord)) 
 					             {
-					            	 stopService(new Intent(MainActivity.this, InvokingService.class));
+					            	 //stopService(new Intent(MainActivity.this, InvokingService.class));
 					            	 InvokingService.isCallMainActivity = false;
 					            	 InvokingService.isLocked = false;
 					                 MainActivity.super.onBackPressed();
-					                 android.os.Process.killProcess(android.os.Process.myPid());
-					                 System.exit(1);
+					                 //android.os.Process.killProcess(android.os.Process.myPid());
+					                 //System.exit(1);
 					             } 
 					             else 
 					             {
@@ -167,6 +169,10 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				isClickAddButton = true;
+				
+				
 				AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
 				alertDialog.setTitle("Nhập mật khẩu");
 				alertDialog.setMessage("Nhập mật khẩu");
@@ -246,7 +252,8 @@ public class MainActivity extends Activity {
 	public void CallFormAddQuestion()
     {
     	Intent addQuestion_activity = new Intent(this,AddQuestionActivity.class);
-		startActivity(addQuestion_activity);
+    	InvokingService.isCallMainActivity = false;
+		startActivity(addQuestion_activity);		
     }
 	
 	@Override
@@ -255,7 +262,8 @@ public class MainActivity extends Activity {
 		//Intent i = new Intent(this, InvokingService.class);
 		InvokingService.timeLimitted = 10 * 1000L;
     	startService(i);
-    	InvokingService.isCallMainActivity = true;
+    	if(!isClickAddButton)
+    		InvokingService.isCallMainActivity = true;
 		
 		super.onPause();
 	}
