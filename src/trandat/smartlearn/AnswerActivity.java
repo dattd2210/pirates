@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Vector;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -236,6 +237,7 @@ public class AnswerActivity extends Activity {
 					//terminate this app when user answer correct number question equal with the given number
 					if(NumberOfCorrectAnswer >= 5)
 					{
+						InvokingService.isCallMainActivity = false;
 						android.os.Process.killProcess(android.os.Process.myPid());
 	                    System.exit(1);
 	                    MainActivity.Exit();
@@ -338,5 +340,22 @@ public class AnswerActivity extends Activity {
 	public void onBackPressed()
 	{
 		
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		InvokingService.isCallMainActivity = false;
+		
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		InvokingService.isCallMainActivity = true;
+		startService(new Intent(this, InvokingService.class));
+		super.onPause();
+		//super.onDestroy();
 	}
 }

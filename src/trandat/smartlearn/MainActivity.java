@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
 	static private String PassWord = "admin";
 	String temp_pass = "";
 	Button btn_class1,btn_class2,btn_class3,btn_close,btn_add,btn_setting; //Button in this activity
+	Intent i;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class MainActivity extends Activity {
         
         //get resource to draw image button
         Resources resources = getResources();
+        
+        i = new Intent(this, InvokingService.class);
         
         //initialize for button in this activity
         btn_class1 = (Button)findViewById(R.id.btn_class1);
@@ -115,7 +118,12 @@ public class MainActivity extends Activity {
 					         {
 					             if (temp_pass.equals(PassWord)) 
 					             {
+					            	 stopService(new Intent(MainActivity.this, InvokingService.class));
+					            	 InvokingService.isCallMainActivity = false;
+					            	 InvokingService.isLocked = false;
 					                 MainActivity.super.onBackPressed();
+					                 android.os.Process.killProcess(android.os.Process.myPid());
+					                 System.exit(1);
 					             } 
 					             else 
 					             {
@@ -225,8 +233,10 @@ public class MainActivity extends Activity {
 	 */
 	public void CallFormAnswer()
     {
-    	Intent answer_activity = new Intent(this,AnswerActivity.class);
+		Intent answer_activity = new Intent(this,AnswerActivity.class);
 		startActivity(answer_activity);
+		InvokingService.isCallMainActivity = false;
+		
 		super.onBackPressed();
     }
 	
@@ -239,5 +249,24 @@ public class MainActivity extends Activity {
 		startActivity(addQuestion_activity);
     }
 	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		//Intent i = new Intent(this, InvokingService.class);
+		InvokingService.timeLimitted = 10 * 1000L;
+    	startService(i);
+    	InvokingService.isCallMainActivity = true;
+		
+		super.onPause();
+	}
 	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		
+    	stopService(i);
+    	InvokingService.isCallMainActivity = false;
+		
+		super.onResume();
+	}
 }
